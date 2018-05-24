@@ -3,7 +3,6 @@ import pygame
 from conf import WHITE
 from math import radians
 
-
 class Bullet:
     def __init__(self, pos, vel, dir):
         self.pos = pos
@@ -12,12 +11,12 @@ class Bullet:
         self.radius = 4
         self.color = WHITE
 
-    def shots_fired(self, player):
+    def collides_with_player(self, p):
         a = self
-        b = player
+        b = p
         d = b.pos - a.pos
         distance = abs(d)
-        # print(distance)
+        #print(distance)
         if distance < a.radius + b.radius:
             return True
         else:
@@ -29,4 +28,3 @@ class Bullet:
     def update(self):
         step = cmath.rect(self.vel, radians(self.dir))
         self.pos += step
-
