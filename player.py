@@ -80,11 +80,18 @@ class Player:
             self.pos = self.pos - cmath.rect(self.vel, radians(self.dir))
         if self.collides_with_other_player(other_player):
             self.pos = self.pos - cmath.rect(self.vel, radians(self.dir))
+        removed_bullets = []
         for b in self.bullets:
             if b.collides_with_player(other_player):
-                other_player.health -= 3
-                b = None
+                other_player.health -= 5
+                removed_bullets.append(b)
+            if b.is_outside_screen():
+                removed_bullets.append(b)
+        for t in removed_bullets:
+            self.bullets.remove(t)
 
+        #
+        #
 
 
     def fire_bullet(self):

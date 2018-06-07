@@ -1,6 +1,6 @@
 import cmath
 import pygame
-from conf import WHITE
+from conf import WHITE, WIDTH, HEIGHT
 from math import radians
 
 class Bullet:
@@ -21,6 +21,12 @@ class Bullet:
             return True
         else:
             return False
+
+    def is_outside_screen(self):
+        return WIDTH <= self.pos.real + self.radius or \
+               HEIGHT <= self.pos.imag + self.radius or \
+               self.pos.real - self.radius < 0 or \
+               self.pos.imag - self.radius < 0
 
     def draw(self, sur):
         pygame.draw.circle(sur, self.color, (int(self.pos.real), int(self.pos.imag)), self.radius)
